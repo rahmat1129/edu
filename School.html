@@ -1,0 +1,801 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example School Name</title>  <!-- Replace with actual school name -->
+
+    <!--  Font Awesome (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google Fonts (Example: Roboto and Open Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!--  Favicon  -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">  <!-- Replace with your school's favicon -->
+
+    <style>
+        /*  Basic Reset  */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff; /* Default link color */
+            transition: color 0.3s ease;  /* Smooth transition for hover effects */
+        }
+
+        a:hover {
+            color: #0056b3;  /* Darker blue on hover */
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px; /* Add padding */
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;  /* Primary button color */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+            text-transform: uppercase; /* Make text uppercase*/
+        }
+
+        .btn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+             background-color: #5a6268;
+        }
+
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-uppercase {
+            text-transform: uppercase;
+        }
+        /* Responsive text utility*/
+        .text-responsive {
+            font-size: calc(1rem + 1vw); /*Adjusts size based on viewport width*/
+           }
+
+
+        /*  Header  */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky; /* Sticky Header on scrool */
+            top: 0;	/* Position on top */
+            z-index: 100; /*Ensures it stays on top of other elements*/
+
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #007bff;
+        }
+        .logo img {
+            height: 50px;  /* Adjust as needed */
+            vertical-align: middle; /* Vertically align the logo image */
+            margin-right: 10px; /* Some spacing between logo image and text*/
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px 15px;
+            border-radius:5px;
+        }
+        nav ul li a:hover {
+            background-color: #eee; /* Light grey on hover*/
+            color: #0056b3;  /*Text color on hover */
+        }
+
+        /* Hamburger Menu (for mobile) */
+        .hamburger {
+            display: none; /* Initially hidden */
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+           }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 3px 0;
+           }
+
+
+        /* Hero Section */
+        #hero {
+            background: url('hero-image.jpg') no-repeat center center/cover; /* Replace with a suitable image */
+            color: #fff;
+            text-align: center;
+            padding: 100px 0;
+            position: relative; /*Needed for the overlay*/
+        }
+        #hero::before{ /* Overlay*/
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /*Semi-transparent black overlay*/
+        }
+        .hero-content {
+            position: relative;
+              z-index: 1;
+        }
+
+        #hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700; /* Bolder */
+            text-shadow: 2px 2px 4px rgba(0,0,0, 0.5); /* Add text shadow */
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+
+        /* About Section */
+        #about {
+            padding: 50px 0;
+        }
+        .about-content{
+
+            display: grid;
+            grid-template-columns: 1fr 1fr; /*Two equal columns*/
+            gap: 30px;
+            align-items: center; /* Vertically center content */
+        }
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px; /*  rounded corners */
+            box-shadow: 0 4px 8px rgba(0,0,0, 0.1) ; /*  subtle shadow */
+        }
+
+         #about h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #0056b3; /* Darker blue for headings*/
+
+        }
+
+        #about p {
+            margin-bottom: 15px;
+        }
+
+        /* Academics Section */
+        #academics {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+        }
+
+        #academics h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #0056b3;
+        }
+
+        .academics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid*/
+            gap: 20px;
+        }
+
+        .academics-card {
+          background-color: #fff;
+          border-radius: 8px;
+          padding: 20px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease, box-shadow 0.3s ease; /*Smooth transitions */
+          text-align: center; /* Center-align text */
+          overflow: hidden; /* Ensure content within rounded corners */
+        }
+
+        .academics-card:hover {
+          transform: translateY(-5px); /*subtle lift */
+          box-shadow: 0 4px 8px rgba(0,0,0, 0.2); /* Enhanced shadow on hover*/
+        }
+
+        .academics-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .academics-card p {
+          color: #555;
+          margin-bottom: 15px;
+        }
+        .academics-card i{ /* Style icons within cards */
+           font-size: 2rem;
+           color: #007bff;
+           margin-bottom: 10px;
+           display: block;/* Make icon take up full width */
+
+        }
+
+
+        /* Admissions Section */
+        #admissions {
+            padding: 50px 0;
+        }
+
+        #admissions h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .admissions-content {
+            display: flex; /* Use flexbox */
+            justify-content: space-between; /* Space out the items */
+            align-items: center; /* Center items vertically */
+            gap:30px; /* Add a gap*/
+        }
+      .admissions-info, .admissions-form {
+         flex: 1; /* Make both sections take equal space */
+        }
+
+        .admissions-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .admissions-form h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color:#0056b3;
+        }
+        .admissions-form input, .admissions-form textarea, .admissions-form select{
+             width: 100%;
+             padding:10px;
+             margin-bottom: 15px;
+             border:1px solid #ccc;
+             border-radius: 5px;
+             font-size: 1rem; /* Standardize font size */
+        }
+        .admissions-form button{
+            width: 100%;
+        }
+
+        /*  News & Events */
+        #news-events {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+        }
+        #news-events h2{
+             font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color:#0056b3;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));  /* Responsive grid*/
+            gap: 20px;
+
+        }
+
+        .news-item {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Prevents content from overflowing */
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .news-item:hover{
+             transform: translateY(-5px);
+           box-shadow: 0 4px 8px rgba(0,0,0, 0.2);
+        }
+
+        .news-item img {
+            width: 100%;
+            height: 200px; /* Fixed height for images*/
+            object-fit: cover; /* Ensure image covers the space */
+            object-position: center; /* Center the image */
+            display: block;/* Avoid inline spacing issues*/
+        }
+
+        .news-item-content {
+            padding: 20px;
+        }
+        .news-item-content h3{
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color:#0056b3; /*Darker Blue*/
+        }
+
+        .news-item-content p {
+            color: #555;
+             margin-bottom: 10px;
+        }
+        .news-item-content .date {
+           font-size: 0.8rem;
+           color: #777;
+           display: block; /*Make date a separate block*/
+           margin-bottom: 5px; /* Space before the title */
+        }
+
+
+        /* Contact Section */
+        #contact {
+            padding: 50px 0;
+        }
+        #contact h2{
+           font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+             color:#0056b3;
+        }
+        .contact-content{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; /* Align items to the top */
+            gap: 30px;
+        }
+
+        .contact-info, .contact-form {
+             flex: 1; /* Both sections take equal space */
+
+        }
+
+        .contact-info p{
+             margin-bottom: 15px;
+        }
+
+        .contact-info i {   /*Style icons */
+            margin-right: 10px;
+            color:#007bff;
+
+
+        }
+        .contact-form{
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        }
+
+        .contact-form h3{
+           margin-bottom: 20px;
+            font-size: 1.5rem;
+             color:#0056b3;
+        }
+        .contact-form input, .contact-form textarea {
+             width: 100%;
+             padding:10px;
+             margin-bottom: 15px;
+             border:1px solid #ccc;
+             border-radius: 5px;
+             font-size: 1rem;
+        }
+        .contact-form button{
+           width: 100%;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;  /* Allow items to wrap on smaller screens*/
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+             display: flex; /*  horizontal list */
+              gap:20px; /* Space between links*/
+		}
+        .footer-links ul li a {
+            color:#fff;
+        }
+        .footer-links ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .social-links a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 1.5rem; /*Icon size*/
+        }
+        .social-links a:hover {
+           color: #ddd; /* Lighten on hover */
+        }
+        .copyright {
+           margin-top: 20px;
+           width: 100%; /* Full width on a new "row" */
+           order: 3; /* Display at the bottom */
+        }
+
+
+        /*  Media Queries  */
+        @media (max-width: 768px) {
+
+            .header-content {
+                flex-direction: column;  /* Stack logo and nav on top of each other */
+              }
+
+            nav {
+                width: 100%; /* Take full width */
+               display: none;  /* Hide by default on mobile*/
+
+            }
+
+            nav.show {
+              display:block;  /* Show when 'show' class is added*/
+            }
+
+            nav ul {
+                flex-direction: column; /* Stack nav items vertically */
+                width: 100%; /* Take full width*/
+                text-align: center; /*center align nav items*/
+            }
+
+            nav ul li {
+                margin: 5px 0; /*Vertical spacing*/
+             }
+              .hamburger {
+                display: flex; /* Show hamburger icon */
+            }
+
+            .about-content, .admissions-content, .contact-content{
+                grid-template-columns: 1fr; /* Switch to a single column */
+                flex-direction: column;
+            }
+               /*  Hero section adjustments */
+              #hero h1 {
+                font-size: 2.5rem;  /*Slightly reduce heading size */
+             }
+
+              #hero p {
+                font-size: 1rem; /*Reduce paragraph size*/
+             }
+
+
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                  <img src="school-logo.png" alt="School Logo"> <!-- Replace with your school's logo -->
+                Example School Name <!-- your school name-->
+            </div>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#academics">Academics</a></li>
+                    <li><a href="#admissions">Admissions</a></li>
+                    <li><a href="#news-events">News &amp; Events</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container hero-content">
+            <h1 class="text-responsive">Welcome to Example School</h1>
+            <p>Providing quality education and fostering a nurturing environment.</p>
+            <a href="#about" class="btn">Learn More</a>
+        </div>
+    </section>
+
+ <section id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                   <img src="about-image.jpg" alt="About the School">  <!-- Replace with actual images-->
+                </div>
+                <div class="about-text">
+                    <h2>About Us</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <a href="#" class="btn btn-secondary">Our History</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="academics">
+        <div class="container">
+            <h2>Academics</h2>
+            <div class="academics-grid">
+                <div class="academics-card">
+                    <i class="fas fa-flask"></i>
+                    <h3>Science</h3>
+                    <p>Explore the wonders of science through hands-on experiments and engaging lessons.</p>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+                <div class="academics-card">
+                    <i class="fas fa-calculator"></i>
+                    <h3>Mathematics</h3>
+                    <p>Develop strong mathematical skills with our comprehensive curriculum.</p>
+                     <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+                <div class="academics-card">
+
+                    <i class="fas fa-book"></i>
+                    <h3>Literature</h3>
+                    <p>Immerse yourself in classic and contemporary literature.</p>
+                     <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+
+                <div class="academics-card">
+                     <i class="fas fa-globe"></i>
+                    <h3>Social Studies</h3>
+                     <p>Discover the world and its history.</p>
+                      <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+
+                 <div class="academics-card">
+                    <i class="fas fa-music"></i>
+                    <h3>Music Program</h3>
+                    <p>Unleash creativity with art, music, and drama.</p>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                 </div>
+
+                <div class="academics-card">
+                   <i class="fas fa-laptop-code"></i>
+                    <h3>Technology</h3>
+                    <p>Coding, robotics, and digital literacy for the modern age.</p>
+                 <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section id="admissions">
+        <div class="container">
+            <h2>Admissions</h2>
+            <div class="admissions-content">
+                <div class="admissions-info">
+
+                    <p>We are currently accepting applications for the next academic year.  Learn more about our admissions process and how to apply.</p>
+                    <ul>
+                      <li><strong>Application Deadline:</strong> March 1, 2024</li>  <!--  placeholders -->
+                      <li><strong>Entrance Exam:</strong>  April 15, 2024</li>
+                      <li><strong>Open House:</strong> February 10, 2024, 10:00 AM - 12:00 PM</li>
+                     </ul>
+
+                     <a href="#" class="btn">Apply Now</a>  <!-- Links to application page (create a new one or link to existing system) -->
+                     <a href="#" class="btn btn-secondary">Tuition &amp; Fees</a>
+                </div>
+
+                <div class="admissions-form">
+                    <h3>Request Information</h3>
+                    <form action="#" method="post">   <!-- Replace '#' with your actual form processing URL -->
+
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                         <select name="grade_level" required>
+                            <option value="">Select Grade Level</option>
+                            <option value="K">Kindergarten</option>
+                            <option value="1">1st Grade</option>
+                            <option value="2">2nd Grade</option>
+                            <option value="3">3rd Grade</option>
+                            <option value="4">4th Grade</option>
+                            <option value="5">5th Grade</option>
+                            <option value="6">6th Grade</option>
+                            <option value="7">7th Grade</option>
+                            <option value="8">8th Grade</option>
+                            <option value="9">9th Grade</option>
+                            <option value="10">10th Grade</option>
+                            <option value="11">11th Grade</option>
+                            <option value="12">12th Grade</option>
+                        </select>
+                        <textarea name="message" placeholder="Your Message" rows="4"></textarea>
+                        <button type="submit" class="btn">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section id="news-events">
+        <div class="container">
+            <h2>News &amp; Events</h2>
+            <div class="news-grid">
+                <div class="news-item">
+                    <img src="news-image-1.jpg" alt="News 1">  <!-- Replace with actual images-->
+                    <div class="news-item-content">
+                        <span class="date">October 26, 2023</span>  <!--  dates -->
+                        <h3>Science Fair Success</h3>
+                        <p>Our students showcased innovative projects at the annual Science Fair.</p>
+                        <a href="#">Read More</a>
+                    </div>
+                </div>
+                <div class="news-item">
+                   <img src="news-image-2.jpg" alt="News 2">  <!-- Replace with actual images -->
+                    <div class="news-item-content">
+                         <span class="date">October 20, 2023</span>
+                        <h3>New Library Resources</h3>
+                        <p>Exciting additions to our library collection are now available!</p>
+                         <a href="#">Read More</a>
+                    </div>
+                </div>
+                <div class="news-item">
+                   <img src="news-image-3.jpg" alt="News 3">  <!--  Replace-->
+                   <div class="news-item-content">
+                        <span class="date">October 15, 2023</span>
+                       <h3>Upcoming School Play</h3>
+                       <p>Get ready for our spectacular school play, "A Night Under the Stars."</p>
+                        <a href="#">Read More</a>
+
+                    </div>
+                </div>
+
+            </div>
+              <div class="text-center">
+                    <a href="#" class="btn">View All News</a> <!-- Add the button -->
+                </div>
+        </div>
+    </section>
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-content">
+
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> 123 School Street, City, State, ZIP</p>  <!-- Replace -->
+                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>  <!-- Replace with -->
+                    <p><i class="fas fa-envelope"></i> info@exampleschool.edu</p>  <!-- Replace-->
+                </div>
+                <div class="contact-form">
+                  <h3>Send us a Message</h3>
+                  <form action="#" method="post">
+                     <input type="text" name="name" placeholder="Your Name" required>
+                     <input type="email" name="email" placeholder="Your Email" required>
+                      <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                      <button type="submit" class="btn">Send Message</button>
+                  </form>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container footer-content">
+              <div class="footer-links">
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                </ul>
+              </div>
+               <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>  <!-- Replace with links -->
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+             </div>
+
+             <div class="copyright">
+                &copy; 2023 Example School Name. All rights reserved.
+            </div>
+       </div>
+
+    </footer>
+
+
+     <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('nav');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('show');
+        });
+
+         // Smooth scrolling for anchor links (optional, but nice to have)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                //  check if the target exists:
+                const targetElement = document.querySelector(this.getAttribute('href'));
+
+                if (targetElement) {
+                   targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+
+                   // Close mobile navigation after clicking a link
+                    if (nav.classList.contains('show')){
+                        nav.classList.remove('show');
+                    }
+                }
+            });
+        });
+
+
+     </script>
+
+</body>
+</html>
+```
