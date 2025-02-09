@@ -1,0 +1,602 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieVerse - Your Ultimate Movie Destination</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Basic Reset and Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  background-color: #121212; color: #fff; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* Header Styles */
+        header {
+            background-color: #1f1f1f;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;  /* For sticky header */
+        }
+        .logo { font-size: 1.8rem; font-weight: bold; color: #e50914; }
+         .search-bar {
+            display: flex;
+            align-items: center; /* Align vertically */
+            position: relative;
+            flex-grow: 1; /* Allow search bar to take available space */
+            margin: 0 2rem;
+         }
+        .search-bar input[type="text"] {
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 25px;  /* Rounded */
+            background-color: #333;
+            color: #fff;
+            width: 100%; /* take up the entire container's width */
+            outline: none;   /* Removes the default focus outline */
+        }
+
+        .search-bar button {
+            background: none;
+            border: none;
+            padding: 0.8rem;
+            cursor: pointer;
+            color: #fff;
+            position: absolute;
+            right: 10px; /* Position relative to the search bar */
+            top: 50%;     /* Center vertically */
+            transform: translateY(-50%);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;  /* Align items vertically */
+        }
+
+        .nav-links li { margin-left: 2rem; }
+        .nav-links a {
+            color: #ddd;
+            transition: color 0.3s;
+            display: block; /* Make the link a block element */
+            padding: 0.5rem;  /* Add internal padding */
+            border-radius: 5px; /* Add rounded borders, if desired */
+        }
+        .nav-links a:hover { color: #fff; background-color: rgba(255, 255, 255, 0.1); }
+
+
+        /* Main Content Styles */
+        main { padding: 2rem;}
+        #hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('https://via.placeholder.com/1920x1080') no-repeat center center/cover; /* Placeholder image */
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        #hero h1 { font-size: 3.5rem; margin-bottom: 1rem;}
+        #hero p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 700px; }
+        #hero .cta-button {
+            background-color: #e50914;
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+        }
+        #hero .cta-button:hover { background-color: #b20710; }
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .movie-card {
+            background-color: #222;
+            border-radius: 8px;
+            overflow: hidden;  /* Ensure content doesn't overflow rounded corners */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            transition: transform 0.2s ease;
+        }
+
+        .movie-card:hover {
+             transform: translateY(-5px);  /* Lift the card slightly */
+             box-shadow: 0 4px 8px rgba(0,0,0,0.7); /* Increase shadow on hover */
+        }
+
+
+        .movie-card img {
+            width: 100%;
+            height: 350px;   /* Fixed height for uniform appearance */
+            object-fit: cover; /* Keeps aspect ratio, covers the area */
+            display: block;    /* Remove any extra space below the image */
+        }
+
+        .movie-card .movie-info { padding: 1rem; }
+        .movie-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .movie-card p { color: #aaa; font-size: 0.9rem; margin-bottom: 0.8rem; }
+        .movie-card .rating { color: #ffd700; /* Gold color for rating */ font-size: 1rem; }
+        .movie-card .download-btn {
+                display: block;
+                width: 100%;
+                padding: 0.7rem 1rem;
+                background-color: #e50914;
+                color: white;
+                text-align: center;
+                border: none;
+                border-radius: 5px;
+                margin-top: 1rem;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+        }
+        .movie-card .download-btn:hover { background-color: #b20708;}
+
+        /* Featured Section */
+        #featured-section { padding: 2rem 0;}
+        #featured-section h2 { font-size: 2rem; margin-bottom: 1rem; text-align: center;}
+
+
+        /* Footer Styles */
+        footer {
+            background-color: #1f1f1f;
+            color: #aaa;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        footer p { margin-bottom: 0.5rem;}
+        .social-icons a {  margin: 0 0.5rem; font-size: 1.5rem; color: #aaa; transition: color 0.3s;}
+        .social-icons a:hover { color: #fff;}
+
+        /* Genres Section Styles */
+        #genres-section { padding: 3rem 0;}
+        #genres-section h2 { font-size: 2rem; margin-bottom: 1.5rem; text-align: center; }
+        .genre-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .genre-item {
+            background-color: #333;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .genre-item:hover {
+            background-color: #e50914;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header { flex-direction: column; }
+            .search-bar { margin: 1rem 0; width: 100%; }
+            .nav-links { width: 100%; justify-content: space-around; margin-top: 1rem;}
+            .nav-links li { margin-left: 0; }
+            #hero h1 { font-size: 2.5rem;}
+             .movies-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));}
+
+        }
+
+        @media (max-width: 480px) {
+            #hero h1 {font-size: 2rem;}
+            #hero p { font-size: 1rem;}
+            .movie-card img { height: 250px; }
+            .movies-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));} /* Smaller cards on very small screens */
+        }
+
+        /* Loading Spinner */
+        .loader-container {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+            .loader {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #e50914; /* Red */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+            }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+              /* modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 101;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+        }
+        .modal-content {
+            background-color: #222;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+
+        .close-btn {
+          color: #aaa;
+          position: absolute;
+          top: 10px;
+          right: 15px;
+          font-size: 2rem;
+          font-weight: bold;
+          cursor: pointer;
+        }
+        .close-btn:hover {
+            color: #fff;
+        }
+        .modal-content img{
+          width: 100%;
+          height: auto;
+          border-radius: 8px;
+          margin-bottom: 1rem;
+
+        }
+        .modal-details h2{
+           font-size: 1.5rem;
+           margin-bottom: .5rem;
+        }
+
+        .modal-details p{
+          margin-bottom: 1rem;
+          line-height: 1.4;
+        }
+
+        .modal-details ul.modal-genres {
+          display: flex;
+          flex-wrap: wrap;
+          gap:.5rem;
+          margin-bottom: 1rem;
+         }
+           .modal-details ul.modal-genres li {
+                background-color: #444;
+                padding: 0.3rem 0.7rem;
+                border-radius: 15px;
+                font-size: 0.8rem;
+
+           }
+            .modal-details .modal-download-links {
+               margin-top: 1rem;
+            }
+            .modal-details .modal-download-links a{
+             display: inline-block;
+             padding: 0.6rem 1.2rem;
+             background-color: #e50914;
+             color: #fff;
+             border-radius: 5px;
+             margin-right: 0.5rem;
+             transition: background-color 0.3s ease;
+            }
+
+            .modal-details .modal-download-links a:hover{
+              background-color: #b20710;
+            }
+           /* custom scroll bar */
+        ::-webkit-scrollbar{
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track{
+            background: #333;
+        }
+        ::-webkit-scrollbar-thumb{
+            background-color: #e50914;
+            border-radius: 5px;
+
+        }
+        ::-webkit-scrollbar-thumb:hover{
+            background-color: #b20710;
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">MovieVerse</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for movies..." id="search-input">
+            <button onclick="searchMovies()"><i class="fas fa-search"></i></button>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Movies</a></li>
+            <li><a href="#">TV Shows</a></li>
+             <li><a href="#">Genres</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h1>Welcome to MovieVerse</h1>
+            <p>Discover and download your favorite movies and TV shows in high quality.</p>
+            <a href="#featured-section" class="cta-button">Explore Now</a>
+        </section>
+
+        <section id="featured-section">
+            <h2>Featured Movies</h2>
+            <div class="movies-grid" id="featured-movies-grid">
+                <!-- Featured movies will be added here dynamically -->
+            </div>
+        </section>
+
+          <section id="genres-section">
+            <h2>Browse by Genre</h2>
+            <ul class="genre-list">
+                <li class="genre-item"><a href="#">Action</a></li>
+                <li class="genre-item"><a href="#">Comedy</a></li>
+                <li class="genre-item"><a href="#">Drama</a></li>
+                <li class="genre-item"><a href="#">Sci-Fi</a></li>
+                <li class="genre-item"><a href="#">Horror</a></li>
+                <li class="genre-item"><a href="#">Thriller</a></li>
+                <li class="genre-item"><a href="#">Animation</a></li>
+                <li class="genre-item"><a href="#">Documentary</a></li>
+            </ul>
+        </section>
+    </main>
+
+       <!-- Modal -->
+      <div id="movieModal" class="modal">
+        <div class="modal-content">
+          <span class="close-btn" onclick="closeModal()">&times;</span>
+          <div class="modal-image">
+             <img id="modal-poster" src="" alt="Movie Poster">
+          </div>
+          <div class="modal-details">
+              <h2 id="modal-title"></h2>
+              <p id="modal-overview"></p>
+              <p>Rating: <span id="modal-rating"></span></p>
+              <ul class="modal-genres" id="modal-genres-list">
+                   <!-- Genres go here -->
+              </ul>
+               <div class="modal-download-links" id="modal-download-section">
+                      <!-- download link -->
+               </div>
+          </div>
+        </div>
+      </div>
+       <!-- Loading Spinner -->
+        <div class="loader-container" id="loader">
+            <div class="loader"></div>
+        </div>
+
+    <footer>
+        <p>&copy; 2023 MovieVerse. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script>
+
+           const apiKey = 'YOUR_TMDB_API_KEY';  // Replace with your actual TMDB API key
+           const baseUrl = 'https://api.themoviedb.org/3';
+           const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
+
+
+        async function fetchFeaturedMovies() {
+            try {
+                   showLoader();
+                   const response = await fetch(`${baseUrl}/movie/popular?api_key=${apiKey}&language=en-US&page=1`);
+                   const data = await response.json();
+                    if (data.results) {
+                      displayMovies(data.results, 'featured-movies-grid');
+                    } else{
+                         handleError('No Featured Movies Found'); // Handle cases where no movies are in results
+                    }
+
+             }  catch (error) {
+                  handleError(error);
+
+            } finally{
+               hideLoader();
+            }
+        }
+
+
+        function handleError(error){
+           console.error('Error fetching data:', error); // Log full error for debugging
+            const errorDiv = document.createElement('div');
+            errorDiv.textContent = `An error occurred: ${error.message || error }`; // Display error message
+            errorDiv.style.color = 'red';
+            errorDiv.style.textAlign = 'center';
+            errorDiv.style.padding = '1rem';
+
+           const featuredGrid = document.getElementById('featured-movies-grid');
+
+            //clear any existing content
+           featuredGrid.innerHTML = '';
+           featuredGrid.appendChild(errorDiv);
+
+
+        }
+        function createMovieCard(movie) {
+            const movieCard = document.createElement('div');
+            movieCard.classList.add('movie-card');
+            movieCard.innerHTML = `
+                <img src="${movie.poster_path ? imageBaseUrl + movie.poster_path : 'https://via.placeholder.com/200x300?text=No+Image'}" alt="${movie.title}">
+                <div class="movie-info">
+                    <h3>${movie.title}</h3>
+                    <p>${movie.release_date ? movie.release_date.substring(0, 4): 'N/A'}</p>  <!-- year only -->
+                    <span class="rating">${movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}</span>
+                     <button class="download-btn" onclick="openModal(${movie.id})">Details & Download</button>
+                </div>
+            `;
+            return movieCard;
+        }
+
+        function displayMovies(movies, gridId) {
+           const gridContainer = document.getElementById(gridId);
+             gridContainer.innerHTML = '';  // Clear previous results.
+
+            movies.forEach(movie => {
+                const movieCard = createMovieCard(movie);
+                gridContainer.appendChild(movieCard);
+            });
+        }
+
+         async function searchMovies(){
+          const query = document.getElementById('search-input').value.trim();
+          if(!query){
+              alert('Please Enter a search term');
+              return;
+          }
+           try {
+               showLoader();
+               const response = await fetch(`${baseUrl}/search/movie?api_key=${apiKey}&language=en-US&query=${encodeURIComponent(query)}&page=1&include_adult=false`);
+               const data = await response.json();
+               if(data.results && data.results.length >0){
+                   displayMovies(data.results, 'featured-movies-grid'); //reusing featured grid
+               } else {
+                   handleError({message: 'No movies found matching your search.'});
+               }
+
+           } catch(error){
+                 handleError(error);
+           } finally{
+               hideLoader();
+           }
+        }
+           //event listern for enter key
+           document.getElementById('search-input').addEventListener('keyup', function(event){
+               if(event.key === 'Enter'){
+                  searchMovies();
+               }
+           });
+
+
+        function showLoader() {
+             document.getElementById('loader').style.display = 'flex';
+        }
+
+        function hideLoader() {
+            document.getElementById('loader').style.display = 'none';
+        }
+
+
+         // open model function
+       async  function openModal(movieId) {
+           try {
+               showLoader();
+               const response = await fetch(`${baseUrl}/movie/${movieId}?api_key=${apiKey}&language=en-US`);
+               const movie = await response.json();
+               if(!response.ok){
+                  throw new Error(`Failed to fetch movie details (Status:${response.status})`); //check HTTP status
+               }
+
+              const posterSrc = movie.poster_path ? imageBaseUrl + movie.poster_path : 'https://via.placeholder.com/300x450?text=No+Image';
+               document.getElementById('modal-poster').src = posterSrc;
+               document.getElementById('modal-title').textContent = movie.title;
+               document.getElementById('modal-overview').textContent = movie.overview;
+               document.getElementById('modal-rating').textContent = movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A';
+
+
+                 // Clear any previous genres.
+               const genresList = document.getElementById('modal-genres-list');
+               genresList.innerHTML = '';
+
+
+               //Display Genre
+              movie.genres.forEach(genre => {
+           const listItem = document.createElement('li');
+            listItem.textContent = genre.name;
+           genresList.appendChild(listItem);
+          });
+
+
+           //create dummy download Links
+            const downloadLinks = document.getElementById('modal-download-section');
+            downloadLinks.innerHTML = ''; //clear existing
+
+              const link720p = createDownloadLink('720p');
+              const link1080p = createDownloadLink('1080p');
+                const link4k = createDownloadLink('4K');
+
+                downloadLinks.appendChild(link720p);
+                downloadLinks.appendChild(link1080p);
+                downloadLinks.appendChild(link4k);
+
+               document.getElementById('movieModal').style.display = 'block';
+
+           } catch(error){
+               handleError(error);
+           } finally {
+                 hideLoader();
+           }
+
+        }
+
+        //create downlaod Link Function
+       function createDownloadLink(quality) {
+         const link = document.createElement('a');
+          link.href = '#';  // Placeholder - Replace with actual download links
+          link.textContent = `Download ${quality}`;
+          link.addEventListener('click', (event) => {
+           event.preventDefault();
+           alert(`Download link for ${quality} will be implemented soon!`);
+          });
+        return link;
+       }
+
+
+       // close modal Function
+
+        function closeModal() {
+            document.getElementById('movieModal').style.display = 'none';
+        }
+
+        // Close the modal if the user clicks outside of it
+       window.onclick = function(event) {
+          const modal = document.getElementById('movieModal');
+          if (event.target == modal) {
+            modal.style.display = "none";
+           }
+        }
+
+
+        // Initial load
+        fetchFeaturedMovies();
+
+    </script>
+</body>
+</html>
+```
