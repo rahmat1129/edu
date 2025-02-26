@@ -481,17 +481,16 @@
             <p>Generate and modify HTML code effortlessly with AI</p>
             <button class="code-btn toggle-mode-btn" onclick="toggleMode()">Toggle Dark/Light Mode</button>
         </div>
-
-          <!-- Model Selection -->
-        <div class="model-selection">
-            <label for="modelSelect" class="model-select-label">Select AI Model:</label>
-            <select id="modelSelect" onchange="handleModelChange()">
-                <option value="google/gemini-2.0-pro-exp-02-05:free">Gemini Pro</option>
-                <option value="cognitivecomputations/dolphin3.0-r1-mistral-24b:free">Mistral Medium</option>
-                 <option value="deepseek/deepseek-chat:free">Deepseek R1</option>
-                <!-- Add other models here -->
-            </select>
-        </div>
+<!-- Model Selection -->
+<div class="model-selection">
+    <label for="modelSelect" class="model-select-label">Select AI Model:</label>
+    <select id="modelSelect">
+        <option value="google/gemini-2.0-pro-exp-02-05:free" selected>Gemini Pro</option>
+        <option value="cognitivecomputations/dolphin3.0-r1-mistral-24b:free">Mistral Medium</option>
+        <option value="deepseek/deepseek-chat:free">Deepseek R1</option>
+        <!-- Add other models here -->
+    </select>
+</div>
 
 
         <div class="tab-buttons">
@@ -666,7 +665,7 @@
                         "model": selectedModel, // Use selected model
                         "messages": [{"role": "user", "content": `Generate HTML code and use telwind css and high quality code and advance fully futuresed : ${prompt} write a complete html code in one html file 
                         futures:- animation, icons, meta tags, 
-                        notes:- Nothing was made about the code, just the code, without any explanation`}],
+                        notes:- Nothing was made about the code, just the code, without any explanation write a text on footer made by Sameer website developer`}],
                         stream: true,
                     })
                 });
@@ -1186,7 +1185,7 @@
                    "model": selectedModel, // Use selected model
                    "messages": [
                     {"role": "user", "content": `Here is the current file content: ${fileContentHTML}`}, // Use file content.
-                    { "role": "user", "content": `Make the following changes: ${modificationPrompt}` }
+                    { "role": "user", "content": `Make the following changes: ${modificationPrompt} without any explanation only code ` }
                    ],
                    stream: true,
                  })
