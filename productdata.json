@@ -25,5 +25,14 @@
     "price": 265,
     "imageUrl": "https://raw.githubusercontent.com/rahmat1129/edu/main/images/1743608715302-image.jpg",
     "addedTimestamp": "2025-04-02T15:45:17.744Z"
+  },
+  {
+    "id": 1743609501881,
+    "category": "home_garden",
+    "name": "Hdh",
+    "description": "Hdty",
+    "price": 64,
+    "imageUrl": "https://raw.githubusercontent.com/rahmat1129/edu/main/images/1743609500223-high_1739685339.jpg",
+    "addedTimestamp": "2025-04-02T15:58:21.881Z"
   }
 ]
