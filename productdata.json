@@ -61,5 +61,14 @@
     "price": 568,
     "imageUrl": "https://raw.githubusercontent.com/rahmat1129/edu/main/images/1743611424667-IMG_20250330_184114_116.jpg",
     "addedTimestamp": "2025-04-02T16:30:27.137Z"
+  },
+  {
+    "id": 1743611550154,
+    "category": "clothing",
+    "name": "Hegg",
+    "description": "Hoij",
+    "price": 565,
+    "imageUrl": "https://raw.githubusercontent.com/rahmat1129/edu/main/images/1743611548335-out_0.jpg",
+    "addedTimestamp": "2025-04-02T16:32:30.154Z"
   }
 ]
