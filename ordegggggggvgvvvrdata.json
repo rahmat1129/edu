@@ -22,7 +22,7 @@
     "status": "Pending"
   },
   {
-    "orderId": 1743611255965,
+    "orderId": "1743611255965",
     "orderTimestamp": "2025-04-02T16:27:35.965Z",
     "customerInfo": {
       "name": "Jii",
@@ -38,9 +38,9 @@
     "productInfo": {
       "id": "1743606293420",
       "name": "Ghh",
-      "price": "25",
+      "price": 25,
       "imageUrl": "https://raw.githubusercontent.com/rahmat1129/edu/main/images/1743606291786-out_0.jpg"
     },
-    "status": "Pending"
+    "status": "Processing"
   }
 ]
