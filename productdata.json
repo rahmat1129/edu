@@ -16,5 +16,14 @@
     "price": 26,
     "imageUrl": "https://raw.githubusercontent.com/rahmat1129/edu/main/images/1743606313792-background_remover_result.png",
     "addedTimestamp": "2025-04-02T15:05:16.946Z"
+  },
+  {
+    "id": 1743608717744,
+    "category": "home_garden",
+    "name": "Hkfg",
+    "description": "Hey ya ",
+    "price": 265,
+    "imageUrl": "https://raw.githubusercontent.com/rahmat1129/edu/main/images/1743608715302-image.jpg",
+    "addedTimestamp": "2025-04-02T15:45:17.744Z"
   }
 ]
