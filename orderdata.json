@@ -1,0 +1,24 @@
+[
+  {
+    "orderId": 1743610907423,
+    "orderTimestamp": "2025-04-02T16:21:47.423Z",
+    "customerInfo": {
+      "name": "Sameee",
+      "phone": "62019990970",
+      "email": "mdrahmatali1129@gmail.com"
+    },
+    "deliveryInfo": {
+      "address": "Darhipatti ",
+      "city": "Muzaffarpur ",
+      "pincode": "843128",
+      "state": "Bihar "
+    },
+    "productInfo": {
+      "id": "1743606316946",
+      "name": "Ji mao",
+      "price": "26",
+      "imageUrl": "https://raw.githubusercontent.com/rahmat1129/edu/main/images/1743606313792-background_remover_result.png"
+    },
+    "status": "Pending"
+  }
+]
