@@ -27,5 +27,14 @@
     "price": 25,
     "imageUrl": "https://raw.githubusercontent.com/rahmat1129/edu/main/images/1743606022767-image.jpg",
     "addedTimestamp": "2025-04-02T15:00:24.802Z"
+  },
+  {
+    "id": 1743606096366,
+    "category": "clothing",
+    "name": "Hello ",
+    "description": "",
+    "price": 29,
+    "imageUrl": "https://raw.githubusercontent.com/rahmat1129/edu/main/images/1743606092998-IMG_20250331_152107_599.jpg",
+    "addedTimestamp": "2025-04-02T15:01:36.366Z"
   }
 ]
