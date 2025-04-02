@@ -7,5 +7,14 @@
     "price": 25,
     "imageUrl": "https://raw.githubusercontent.com/rahmat1129/edu/main/images/1743606291786-out_0.jpg",
     "addedTimestamp": "2025-04-02T15:04:53.420Z"
+  },
+  {
+    "id": 1743606316946,
+    "category": "home_garden",
+    "name": "Ji mao",
+    "description": "Bjc",
+    "price": 26,
+    "imageUrl": "https://raw.githubusercontent.com/rahmat1129/edu/main/images/1743606313792-background_remover_result.png",
+    "addedTimestamp": "2025-04-02T15:05:16.946Z"
   }
 ]
