@@ -52,5 +52,14 @@
     "price": 588,
     "imageUrl": "https://raw.githubusercontent.com/rahmat1129/edu/main/images/1743611315733-IMG_20250329_102357_958.webp",
     "addedTimestamp": "2025-04-02T16:28:37.184Z"
+  },
+  {
+    "id": 1743611427137,
+    "category": "home_garden",
+    "name": "Jiufg",
+    "description": "Gyrg",
+    "price": 568,
+    "imageUrl": "https://raw.githubusercontent.com/rahmat1129/edu/main/images/1743611424667-IMG_20250330_184114_116.jpg",
+    "addedTimestamp": "2025-04-02T16:30:27.137Z"
   }
 ]
