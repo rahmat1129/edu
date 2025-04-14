@@ -11,8 +11,10 @@
         body {
             font-family: 'Poppins', sans-serif;
             scroll-behavior: smooth;
+             overflow-x: hidden; /* Prevent horizontal scrollbars from animations */
         }
 
+        /* === Base Fade In Animations (Hero Section) === */
         .fade-in {
             animation: fadeInAnimation 1s ease-in forwards;
         }
@@ -27,45 +29,19 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .slide-in-left {
-            animation: slideInLeftAnimation 1s ease-out forwards;
-            opacity: 0;
-        }
-
-        @keyframes slideInLeftAnimation {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .slide-in-right {
-            animation: slideInRightAnimation 1s ease-out forwards;
-            opacity: 0;
-        }
-
-        @keyframes slideInRightAnimation {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-         .scale-up-center {
-            animation: scaleUpCenter 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) forwards;
-             opacity: 0;
-        }
-        @keyframes scaleUpCenter {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
+        /* === Hero Background === */
         .hero-bg {
            background: linear-gradient(rgba(0, 80, 150, 0.7), rgba(0, 30, 80, 0.8)), url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80') no-repeat center center;
            background-size: cover;
         }
 
+        /* === Feature Card Hover Effect === */
         .feature-card:hover {
             transform: translateY(-10px) scale(1.03);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
+        /* === Navigation Link Hover Effect === */
         .nav-link {
             position: relative;
             transition: color 0.3s ease;
@@ -87,26 +63,192 @@
             width: 100%;
         }
 
-        /* Simple Scroll Animation Trigger (requires JS for robust implementation) */
-        /* Using CSS for elements initially in view */
+        /* === Scroll Animation Base (AOS Logic) === */
          [data-aos] {
             opacity: 0;
-            transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+            transition: transform 0.8s ease-out, opacity 0.8s ease-out, filter 0.8s ease-out; /* Added filter */
+            will-change: transform, opacity, filter; /* Performance hint */
         }
          .aos-animate {
             opacity: 1;
          }
-        .aos-slide-up { transform: translateY(50px); }
-        .aos-slide-up.aos-animate { transform: translateY(0); }
 
-        .aos-slide-left { transform: translateX(-50px); }
-        .aos-slide-left.aos-animate { transform: translateX(0); }
+        /* === NEW Animation Keyframes === */
 
-        .aos-slide-right { transform: translateX(50px); }
-        .aos-slide-right.aos-animate { transform: translateX(0); }
+        @keyframes waterDrop {
+            0% { transform: translateY(-100px) scale(0.5); opacity: 0; }
+            60% { transform: translateY(10px) scale(1.1); opacity: 1; }
+            80% { transform: translateY(-5px) scale(0.95); }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
 
-        .aos-fade-in { opacity: 0; }
-        .aos-fade-in.aos-animate { opacity: 1; }
+        @keyframes slideDownRotate {
+            0% { opacity: 0; transform: translateY(-50px) rotate(-15deg); }
+            100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+        }
+
+        @keyframes slideUpRotate {
+            0% { opacity: 0; transform: translateY(50px) rotate(15deg); }
+            100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+        }
+
+        @keyframes zoomIn {
+            0% { opacity: 0; transform: scale(0.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes zoomOut { /* Entrance zoom out */
+            0% { opacity: 0; transform: scale(2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes flipLeft {
+            0% { opacity: 0; transform: perspective(1000px) rotateY(-90deg); }
+            100% { opacity: 1; transform: perspective(1000px) rotateY(0deg); }
+        }
+
+        @keyframes flipRight {
+             0% { opacity: 0; transform: perspective(1000px) rotateY(90deg); }
+            100% { opacity: 1; transform: perspective(1000px) rotateY(0deg); }
+        }
+
+        @keyframes flipUp {
+            0% { opacity: 0; transform: perspective(1000px) rotateX(-90deg); }
+            100% { opacity: 1; transform: perspective(1000px) rotateX(0deg); }
+        }
+
+        @keyframes flipDown {
+            0% { opacity: 0; transform: perspective(1000px) rotateX(90deg); }
+            100% { opacity: 1; transform: perspective(1000px) rotateX(0deg); }
+        }
+
+        @keyframes rotateIn {
+            0% { opacity: 0; transform: rotate(-180deg) scale(0.5); }
+            100% { opacity: 1; transform: rotate(0deg) scale(1); }
+        }
+
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInLeft {
+            0% { opacity: 0; transform: translateX(-30px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            0% { opacity: 0; transform: translateX(30px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes blurIn {
+            0% { opacity: 0; filter: blur(10px); }
+            100% { opacity: 1; filter: blur(0px); }
+        }
+
+        @keyframes skewInLeft {
+            0% { opacity: 0; transform: skewX(-30deg) translateX(-50px); }
+            100% { opacity: 1; transform: skewX(0deg) translateX(0); }
+        }
+        @keyframes skewInRight {
+            0% { opacity: 0; transform: skewX(30deg) translateX(50px); }
+            100% { opacity: 1; transform: skewX(0deg) translateX(0); }
+        }
+
+
+        @keyframes jello {
+          0% { transform: none; opacity: 0; } /* Start invisible */
+          11.1% { transform: skewX(-12.5deg) skewY(-12.5deg); opacity: 1;}
+          22.2% { transform: skewX(6.25deg) skewY(6.25deg); }
+          33.3% { transform: skewX(-3.125deg) skewY(-3.125deg); }
+          44.4% { transform: skewX(1.5625deg) skewY(1.5625deg); }
+          55.5% { transform: skewX(-0.78125deg) skewY(-0.78125deg); }
+          66.6% { transform: skewX(0.390625deg) skewY(0.390625deg); }
+          77.7% { transform: skewX(-0.1953125deg) skewY(-0.1953125deg); }
+          88.8% { transform: skewX(0.09765625deg) skewY(0.09765625deg); }
+          100% { transform: none; opacity: 1;}
+        }
+
+        @keyframes rollIn {
+          0% { opacity: 0; transform: translateX(-100%) rotate(-120deg); }
+          100% { opacity: 1; transform: translateX(0) rotate(0deg); }
+        }
+
+         @keyframes scaleUpCenter { /* Keep custom non-AOS anim if needed OR replace */
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        /* If using scaleUpCenter without AOS, remove data-aos attribute */
+        .scale-up-center {
+            animation: scaleUpCenter 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) forwards;
+             opacity: 0;
+        }
+
+
+        /* === NEW Animation Definitions for [data-aos] === */
+        /* Define initial state */
+        [data-aos="water-drop"] { transform: translateY(-100px) scale(0.5); opacity: 0; }
+        [data-aos="slide-down-rotate"] { transform: translateY(-50px) rotate(-15deg); opacity: 0; }
+        [data-aos="slide-up-rotate"] { transform: translateY(50px) rotate(15deg); opacity: 0; }
+        [data-aos="zoom-in"] { transform: scale(0.1); opacity: 0; }
+        [data-aos="zoom-out"] { transform: scale(2); opacity: 0; }
+        [data-aos="flip-left"] { transform: perspective(1000px) rotateY(-90deg); opacity: 0; }
+        [data-aos="flip-right"] { transform: perspective(1000px) rotateY(90deg); opacity: 0; }
+        [data-aos="flip-up"] { transform: perspective(1000px) rotateX(-90deg); opacity: 0; }
+        [data-aos="flip-down"] { transform: perspective(1000px) rotateX(90deg); opacity: 0; }
+        [data-aos="rotate-in"] { transform: rotate(-180deg) scale(0.5); opacity: 0; }
+        [data-aos="bounce-in"] { transform: scale(0.3); opacity: 0; }
+        [data-aos="fade-up"] { transform: translateY(50px); opacity: 0; }
+        [data-aos="fade-down"] { transform: translateY(-50px); opacity: 0; }
+        [data-aos="fade-left"] { transform: translateX(-50px); opacity: 0; }
+        [data-aos="fade-right"] { transform: translateX(50px); opacity: 0; }
+        [data-aos="fade-in-up"] { transform: translateY(30px); opacity: 0;}
+        [data-aos="fade-in-down"] { transform: translateY(-30px); opacity: 0;}
+        [data-aos="fade-in-left"] { transform: translateX(-30px); opacity: 0;}
+        [data-aos="fade-in-right"] { transform: translateX(30px); opacity: 0;}
+        [data-aos="blur-in"] { filter: blur(10px); opacity: 0; }
+        [data-aos="skew-in-left"] { transform: skewX(-30deg) translateX(-50px); opacity: 0; }
+        [data-aos="skew-in-right"] { transform: skewX(30deg) translateX(50px); opacity: 0; }
+        [data-aos="jello"] { opacity: 0; } /* Keyframe handles transform */
+        [data-aos="roll-in"] { transform: translateX(-100%) rotate(-120deg); opacity: 0; }
+        [data-aos="fade-in"] { opacity: 0; }
+
+        /* Define final state when .aos-animate is added */
+        [data-aos="water-drop"].aos-animate { transform: translateY(0) scale(1); opacity: 1; animation: waterDrop 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; }
+        [data-aos="slide-down-rotate"].aos-animate { transform: translateY(0) rotate(0deg); opacity: 1; }
+        [data-aos="slide-up-rotate"].aos-animate { transform: translateY(0) rotate(0deg); opacity: 1; }
+        [data-aos="zoom-in"].aos-animate { transform: scale(1); opacity: 1; }
+        [data-aos="zoom-out"].aos-animate { transform: scale(1); opacity: 1; }
+        [data-aos="flip-left"].aos-animate { transform: perspective(1000px) rotateY(0deg); opacity: 1; }
+        [data-aos="flip-right"].aos-animate { transform: perspective(1000px) rotateY(0deg); opacity: 1; }
+        [data-aos="flip-up"].aos-animate { transform: perspective(1000px) rotateX(0deg); opacity: 1; }
+        [data-aos="flip-down"].aos-animate { transform: perspective(1000px) rotateX(0deg); opacity: 1; }
+        [data-aos="rotate-in"].aos-animate { transform: rotate(0deg) scale(1); opacity: 1; }
+        [data-aos="bounce-in"].aos-animate { opacity: 1; animation: bounceIn 1s ease forwards; transform: scale(1);}
+        [data-aos="fade-up"].aos-animate { transform: translateY(0); opacity: 1; }
+        [data-aos="fade-down"].aos-animate { transform: translateY(0); opacity: 1; }
+        [data-aos="fade-left"].aos-animate { transform: translateX(0); opacity: 1; }
+        [data-aos="fade-right"].aos-animate { transform: translateX(0); opacity: 1; }
+        [data-aos="fade-in-up"].aos-animate { transform: translateY(0); opacity: 1;}
+        [data-aos="fade-in-down"].aos-animate { transform: translateY(0); opacity: 1;}
+        [data-aos="fade-in-left"].aos-animate { transform: translateX(0); opacity: 1;}
+        [data-aos="fade-in-right"].aos-animate { transform: translateX(0); opacity: 1;}
+        [data-aos="blur-in"].aos-animate { filter: blur(0px); opacity: 1; }
+        [data-aos="skew-in-left"].aos-animate { transform: skewX(0deg) translateX(0); opacity: 1; }
+        [data-aos="skew-in-right"].aos-animate { transform: skewX(0deg) translateX(0); opacity: 1; }
+        [data-aos="jello"].aos-animate { opacity: 1; animation: jello 1s ease forwards; }
+        [data-aos="roll-in"].aos-animate { transform: translateX(0) rotate(0deg); opacity: 1; }
+        [data-aos="fade-in"].aos-animate { opacity: 1; }
 
 
     </style>
@@ -158,20 +300,20 @@
     </section>
 
     <!-- About Us Section -->
-    <section id="about" class="py-20 bg-white" data-aos >
+    <section id="about" class="py-20 bg-white overflow-hidden">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2 aos-animate aos-slide-right" data-aos="slide-right">
+                <div class="md:w-1/2" data-aos="zoom-in">
                     <img src="https://via.placeholder.com/600x400/e2e8f0/94a3b8?text=School+Campus" alt="School Campus" class="rounded-lg shadow-xl w-full">
                 </div>
-                <div class="md:w-1/2 aos-animate aos-slide-left" data-aos="slide-left">
+                <div class="md:w-1/2" data-aos="fade-left">
                     <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-4">About Holly Angel</h2>
-                    <p class="text-gray-600 mb-4 leading-relaxed">Established with a vision to provide exceptional education, Holly Angel Public School is dedicated to fostering intellectual curiosity, critical thinking, and strong moral values.</p>
-                    <p class="text-gray-600 mb-6 leading-relaxed">Our experienced faculty, state-of-the-art facilities, and comprehensive curriculum ensure a nurturing environment where students thrive academically, socially, and emotionally.</p>
+                    <p class="text-gray-600 mb-4 leading-relaxed" data-aos="fade-up" data-aos-delay="100">Established with a vision to provide exceptional education, Holly Angel Public School is dedicated to fostering intellectual curiosity, critical thinking, and strong moral values.</p>
+                    <p class="text-gray-600 mb-6 leading-relaxed" data-aos="fade-up" data-aos-delay="200">Our experienced faculty, state-of-the-art facilities, and comprehensive curriculum ensure a nurturing environment where students thrive academically, socially, and emotionally.</p>
                     <ul class="space-y-2 text-gray-700">
-                        <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Dedicated & Qualified Staff</li>
-                        <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Modern Infrastructure</li>
-                        <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Holistic Development Focus</li>
+                        <li class="flex items-center" data-aos="fade-in-up" data-aos-delay="300"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Dedicated & Qualified Staff</li>
+                        <li class="flex items-center" data-aos="fade-in-up" data-aos-delay="400"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Modern Infrastructure</li>
+                        <li class="flex items-center" data-aos="fade-in-up" data-aos-delay="500"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Holistic Development Focus</li>
                     </ul>
                 </div>
             </div>
@@ -179,12 +321,12 @@
     </section>
 
     <!-- Features/Programs Section -->
-    <section id="features" class="py-20 bg-blue-50" data-aos>
+    <section id="features" class="py-20 bg-blue-50 overflow-hidden">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-blue-800 text-center mb-12 aos-animate aos-fade-in" data-aos="fade-in">Our Programs & Features</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-blue-800 text-center mb-12" data-aos="fade-down">Our Programs & Features</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Feature Card 1 -->
-                <div class="feature-card bg-white p-8 rounded-lg shadow-lg transition duration-300 ease-in-out aos-animate aos-slide-up" data-aos="slide-up" data-aos-delay="100">
+                <div class="feature-card bg-white p-8 rounded-lg shadow-lg transition duration-300 ease-in-out" data-aos="flip-left" data-aos-delay="100">
                     <div class="text-blue-600 mb-4">
                         <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                     </div>
@@ -192,14 +334,15 @@
                     <p class="text-gray-600 text-center leading-relaxed">Rigorous curriculum designed to challenge students and foster a love for learning.</p>
                 </div>
                 <!-- Feature Card 2 -->
-                <div class="feature-card bg-white p-8 rounded-lg shadow-lg transition duration-300 ease-in-out aos-animate aos-slide-up" data-aos="slide-up" data-aos-delay="200">
+                <div class="feature-card bg-white p-8 rounded-lg shadow-lg transition duration-300 ease-in-out" data-aos="flip-up" data-aos-delay="200">
                     <div class="text-green-600 mb-4">
-                         <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>                   </div>
+                         <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+                    </div>
                     <h3 class="text-xl font-semibold text-center text-gray-800 mb-3">Sports & Athletics</h3>
                     <p class="text-gray-600 text-center leading-relaxed">Encouraging physical fitness, teamwork, and sportsmanship through diverse sports programs.</p>
                 </div>
                 <!-- Feature Card 3 -->
-                <div class="feature-card bg-white p-8 rounded-lg shadow-lg transition duration-300 ease-in-out aos-animate aos-slide-up" data-aos="slide-up" data-aos-delay="300">
+                <div class="feature-card bg-white p-8 rounded-lg shadow-lg transition duration-300 ease-in-out" data-aos="flip-right" data-aos-delay="300">
                     <div class="text-purple-600 mb-4">
                         <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l7-3v13l-7 3zM9 19c-1.657 0-3-1.343-3-3V7c0-1.657 1.343-3 3-3s3 1.343 3 3v9c0 1.657-1.343 3-3 3z"></path></svg>
                     </div>
@@ -211,32 +354,32 @@
     </section>
 
      <!-- Gallery Section -->
-    <section id="gallery" class="py-20 bg-white" data-aos>
+    <section id="gallery" class="py-20 bg-white overflow-hidden">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-blue-800 text-center mb-12 aos-animate aos-fade-in" data-aos="fade-in">School Life Gallery</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-blue-800 text-center mb-12" data-aos="zoom-out">School Life Gallery</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <div class="overflow-hidden rounded-lg shadow-md group aos-animate aos-fade-in" data-aos="fade-in" data-aos-delay="100">
+                <div class="overflow-hidden rounded-lg shadow-md group" data-aos="zoom-in" data-aos-delay="100">
                     <img src="https://via.placeholder.com/400x300/818cf8/ffffff?text=Classroom" alt="Gallery Image 1" class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-110">
                 </div>
-                 <div class="overflow-hidden rounded-lg shadow-md group aos-animate aos-fade-in" data-aos="fade-in" data-aos-delay="150">
+                 <div class="overflow-hidden rounded-lg shadow-md group" data-aos="rotate-in" data-aos-delay="150">
                     <img src="https://via.placeholder.com/400x300/60a5fa/ffffff?text=Sports+Day" alt="Gallery Image 2" class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-110">
                 </div>
-                 <div class="overflow-hidden rounded-lg shadow-md group aos-animate aos-fade-in" data-aos="fade-in" data-aos-delay="200">
+                 <div class="overflow-hidden rounded-lg shadow-md group" data-aos="fade-up" data-aos-delay="200">
                     <img src="https://via.placeholder.com/400x300/34d399/ffffff?text=Art+Class" alt="Gallery Image 3" class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-110">
                 </div>
-                 <div class="overflow-hidden rounded-lg shadow-md group aos-animate aos-fade-in" data-aos="fade-in" data-aos-delay="250">
+                 <div class="overflow-hidden rounded-lg shadow-md group" data-aos="blur-in" data-aos-delay="250">
                     <img src="https://via.placeholder.com/400x300/fbbf24/ffffff?text=Library" alt="Gallery Image 4" class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-110">
                 </div>
-                <div class="overflow-hidden rounded-lg shadow-md group aos-animate aos-fade-in md:col-start-1 lg:col-start-auto" data-aos="fade-in" data-aos-delay="300">
+                <div class="overflow-hidden rounded-lg shadow-md group md:col-start-1 lg:col-start-auto" data-aos="flip-down" data-aos-delay="300">
                     <img src="https://via.placeholder.com/400x300/f87171/ffffff?text=Science+Lab" alt="Gallery Image 5" class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-110">
                 </div>
-                 <div class="overflow-hidden rounded-lg shadow-md group aos-animate aos-fade-in" data-aos="fade-in" data-aos-delay="350">
+                 <div class="overflow-hidden rounded-lg shadow-md group" data-aos="water-drop" data-aos-delay="350">
                     <img src="https://via.placeholder.com/400x300/a78bfa/ffffff?text=School+Event" alt="Gallery Image 6" class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-110">
                 </div>
-                 <div class="overflow-hidden rounded-lg shadow-md group aos-animate aos-fade-in" data-aos="fade-in" data-aos-delay="400">
+                 <div class="overflow-hidden rounded-lg shadow-md group" data-aos="skew-in-left" data-aos-delay="400">
                     <img src="https://via.placeholder.com/400x300/22d3ee/ffffff?text=Playground" alt="Gallery Image 7" class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-110">
                 </div>
-                 <div class="overflow-hidden rounded-lg shadow-md group aos-animate aos-fade-in" data-aos="fade-in" data-aos-delay="450">
+                 <div class="overflow-hidden rounded-lg shadow-md group" data-aos="roll-in" data-aos-delay="450">
                     <img src="https://via.placeholder.com/400x300/9ca3af/ffffff?text=Graduation" alt="Gallery Image 8" class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-110">
                 </div>
             </div>
@@ -244,59 +387,59 @@
     </section>
 
     <!-- Admissions Section -->
-    <section id="admissions" class="py-20 bg-gradient-to-r from-blue-700 to-indigo-800 text-white" data-aos>
+    <section id="admissions" class="py-20 bg-gradient-to-r from-blue-700 to-indigo-800 text-white overflow-hidden">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6 scale-up-center">Ready to Join Us?</h2>
-            <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto scale-up-center" style="animation-delay: 0.2s;">Become a part of the Holly Angel family. Explore our admission process and start your journey with us.</p>
-            <div class="scale-up-center" style="animation-delay: 0.4s;">
-                 <a href="#" class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-3 px-10 rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-lg shadow-lg">Apply Now</a>
+            <h2 class="text-3xl md:text-4xl font-bold mb-6" data-aos="bounce-in">Ready to Join Us?</h2>
+            <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">Become a part of the Holly Angel family. Explore our admission process and start your journey with us.</p>
+            <div data-aos="jello" data-aos-delay="400">
+                 <a href="#" class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-3 px-10 rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-lg shadow-lg inline-block">Apply Now</a>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-100" data-aos>
+    <section id="contact" class="py-20 bg-gray-100 overflow-hidden">
         <div class="container mx-auto px-6">
-             <h2 class="text-3xl md:text-4xl font-bold text-blue-800 text-center mb-12 aos-animate aos-fade-in" data-aos="fade-in">Get In Touch</h2>
+             <h2 class="text-3xl md:text-4xl font-bold text-blue-800 text-center mb-12" data-aos="water-drop">Get In Touch</h2>
             <div class="flex flex-col md:flex-row gap-10">
                 <!-- Contact Info -->
-                <div class="md:w-1/3 aos-animate aos-slide-right" data-aos="slide-right">
+                <div class="md:w-1/3" data-aos="slide-down-rotate">
                      <h3 class="text-xl font-semibold text-gray-800 mb-4">Contact Information</h3>
                      <p class="text-gray-600 mb-4">Feel free to reach out to us through any of the following methods:</p>
                      <div class="space-y-4 text-gray-700">
-                         <p class="flex items-start"><svg class="w-5 h-5 text-blue-600 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg> 123 School Lane, Education City, EC 12345</p>
-                         <p class="flex items-center"><svg class="w-5 h-5 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.84 18 2 12.16 2 5V3z"></path></svg> (123) 456-7890</p>
-                         <p class="flex items-center"><svg class="w-5 h-5 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg> info@hollyangelps.edu</p>
+                         <p class="flex items-start" data-aos="fade-right" data-aos-delay="200"><svg class="w-5 h-5 text-blue-600 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg> 123 School Lane, Education City, EC 12345</p>
+                         <p class="flex items-center" data-aos="fade-right" data-aos-delay="300"><svg class="w-5 h-5 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.84 18 2 12.16 2 5V3z"></path></svg> (123) 456-7890</p>
+                         <p class="flex items-center" data-aos="fade-right" data-aos-delay="400"><svg class="w-5 h-5 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg> info@hollyangelps.edu</p>
                      </div>
-                     <div class="mt-6 flex space-x-4">
+                     <div class="mt-6 flex space-x-4" data-aos="fade-up" data-aos-delay="500">
                         <a href="#" class="text-gray-500 hover:text-blue-700 transition duration-300"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
                         <a href="#" class="text-gray-500 hover:text-blue-700 transition duration-300"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
                         <a href="#" class="text-gray-500 hover:text-blue-700 transition duration-300"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.523 2 12 2z" clip-rule="evenodd" /></svg></a>
                      </div>
                 </div>
                  <!-- Contact Form -->
-                <div class="md:w-2/3 aos-animate aos-slide-left" data-aos="slide-left">
+                <div class="md:w-2/3" data-aos="slide-up-rotate">
                      <h3 class="text-xl font-semibold text-gray-800 mb-4">Send Us a Message</h3>
                     <form action="#" method="POST" class="space-y-5">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            <div>
+                            <div data-aos="fade-in-up" data-aos-delay="100">
                                 <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                                 <input type="text" name="name" id="name" required class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out">
                             </div>
-                            <div>
+                            <div data-aos="fade-in-up" data-aos-delay="200">
                                 <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                                 <input type="email" name="email" id="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out">
                             </div>
                         </div>
-                         <div>
+                         <div data-aos="fade-in-up" data-aos-delay="300">
                             <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
                             <input type="text" name="subject" id="subject" required class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out">
                         </div>
-                        <div>
+                        <div data-aos="fade-in-up" data-aos-delay="400">
                             <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
                             <textarea name="message" id="message" rows="5" required class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"></textarea>
                         </div>
-                        <div>
+                        <div data-aos="zoom-in" data-aos-delay="500">
                             <button type="submit" class="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-base font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-105">
                                 Send Message
                             </button>
@@ -310,8 +453,8 @@
     <!-- Footer -->
     <footer class="bg-gray-900 text-gray-400 py-10">
         <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2023 Holly Angel Public School. All Rights Reserved.</p>
-            <p class="mt-2 text-sm">Designed with <span class="text-red-500">&hearts;</span> for Education</p>
+            <p data-aos="fade-up" data-aos-anchor-placement="top-bottom">&copy; 2023 Holly Angel Public School. All Rights Reserved.</p>
+            <p class="mt-2 text-sm" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="100">Designed with <span class="text-red-500">&hearts;</span> for Education</p>
         </div>
     </footer>
 
@@ -331,27 +474,51 @@
             });
         });
 
-        // Sticky Header background on scroll
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('bg-white', 'shadow-lg');
-                 header.classList.remove('bg-transparent', 'text-white');
-            } else if (document.documentElement.scrollTop < 5) { // Check if scrolled back to top
-                header.classList.remove('bg-white', 'shadow-lg');
-                 // Only make transparent if hero is visible and needs it
-                 // header.classList.add('bg-transparent', 'text-white'); // adjust based on initial design
-            }
-        });
+        // Sticky Header background on scroll (Keep original logic)
+       const header = document.getElementById('header');
+        let isHeroVisible = true; // Assume hero is initially visible
 
-        // Basic Scroll Animation Triggering (Intersection Observer)
+        const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            isHeroVisible = entry.isIntersecting;
+            handleHeaderStyle();
+            });
+        }, { threshold: 0.1 }); // Adjust threshold as needed
+
+        const heroSection = document.getElementById('hero');
+        if (heroSection) {
+            heroObserver.observe(heroSection);
+        }
+
+
+        function handleHeaderStyle() {
+            // Add background immediately if not at top OR if hero isn't visible even at top
+             if (window.scrollY > 50 || !isHeroVisible) {
+                header.classList.add('bg-white', 'shadow-lg');
+                 // Remove transparent styles if they were added
+                 header.classList.remove('bg-transparent', 'text-white');
+             } else if (window.scrollY <= 50 && isHeroVisible) {
+                // Only remove background if truly at the top AND hero is visible
+                 header.classList.remove('bg-white', 'shadow-lg');
+                 // Optional: Add back transparency if needed for hero overlay effect
+                 // header.classList.add('bg-transparent','text-white'); // Make sure initial state matches
+            }
+        }
+         // Initial check in case the page loads scrolled down
+         handleHeaderStyle();
+        // Add scroll listener
+        window.addEventListener('scroll', handleHeaderStyle);
+
+
+
+        // Scroll Animation Triggering (Intersection Observer)
         const aosElements = document.querySelectorAll('[data-aos]');
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('aos-animate');
-                    // Optional: unobserve after animation to save resources
+                    // Optional: unobserve after animation
                     // observer.unobserve(entry.target);
                 } else {
                      // Optional: remove class to re-animate on scroll up
@@ -359,16 +526,13 @@
                 }
             });
         }, {
-            threshold: 0.1 // Trigger when 10% of the element is visible
+            threshold: 0.1 // Trigger when 10% is visible
         });
 
         aosElements.forEach(el => {
             observer.observe(el);
-            // Initialize base styles
-             const animationType = el.getAttribute('data-aos');
-             if(animationType) {
-                 el.classList.add(`aos-${animationType}`);
-             }
+            // Note: Base styles (opacity 0, initial transform) are now set in CSS using [data-aos="..."] attribute selectors.
+            // The .aos-animate class simply triggers the transition to the final state defined in CSS.
         });
 
     </script>
